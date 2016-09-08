@@ -188,7 +188,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				
 				public void actionPerformed(ActionEvent e) {
 					
-					getRdbtnModoManualIsSelected();
+					setRdbtnModoManualSelected(true);
 					
 				}
 				
@@ -205,7 +205,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				
 				public void actionPerformed(ActionEvent e) {
 					
-					getRdbtnModoIntermitenteIsSelected();
+					setRdbtnModoIntermitenteSelected(true);
 					
 				}
 				
@@ -222,7 +222,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				
 				public void actionPerformed(ActionEvent e) {
 					
-					getRdbtnModoContinuoIsSelected();
+					setRdbtnModoContinuoSelected(true);
 					
 				}
 				
@@ -264,7 +264,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualCilindroLigado.setBounds(15, 30, 60, 30);
 				rdbtnModoManualCilindroLigado.setForeground(VERDE_ESCURO);
 				rdbtnModoManualCilindroLigado.setText("Ligado");
-				rdbtnModoManualCilindroLigado.setSelected(true);
+//				rdbtnModoManualCilindroLigado.setSelected(true);
 				lblBorderCilindroManual.add(rdbtnModoManualCilindroLigado);
 		
 		
@@ -273,6 +273,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualCilindroDesligado.setBounds(103, 30, 80, 30);
 				rdbtnModoManualCilindroDesligado.setForeground(Color.RED);
 				rdbtnModoManualCilindroDesligado.setText("Desligado");
+				rdbtnModoManualCilindroDesligado.setSelected(true);
 				lblBorderCilindroManual.add(rdbtnModoManualCilindroDesligado);
 		
 		
@@ -501,7 +502,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualVentiladorLigado.setBounds(15, 30, 60, 30);
 				rdbtnModoManualVentiladorLigado.setForeground(VERDE_ESCURO);
 				rdbtnModoManualVentiladorLigado.setText("Ligado");
-				rdbtnModoManualVentiladorLigado.setSelected(true);
+//				rdbtnModoManualVentiladorLigado.setSelected(true);
 				lblBorderVentiladorManual.add(rdbtnModoManualVentiladorLigado);
 		
 		
@@ -510,6 +511,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualVentiladorDesligado.setBounds(103, 30, 80, 30);
 				rdbtnModoManualVentiladorDesligado.setForeground(Color.RED);
 				rdbtnModoManualVentiladorDesligado.setText("Desligado");
+				rdbtnModoManualVentiladorDesligado.setSelected(true);
 				lblBorderVentiladorManual.add(rdbtnModoManualVentiladorDesligado);
 		
 				
@@ -738,7 +740,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualAuxiliarLigado.setBounds(15, 30, 60, 30);
 				rdbtnModoManualAuxiliarLigado.setForeground(VERDE_ESCURO);
 				rdbtnModoManualAuxiliarLigado.setText("Ligado");
-				rdbtnModoManualAuxiliarLigado.setSelected(true);
+//				rdbtnModoManualAuxiliarLigado.setSelected(true);
 				lblBorderAuxiliarManual.add(rdbtnModoManualAuxiliarLigado);
 		
 		
@@ -747,6 +749,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdbtnModoManualAuxiliarDesligado.setBounds(103, 30, 80, 30);
 				rdbtnModoManualAuxiliarDesligado.setForeground(Color.RED);
 				rdbtnModoManualAuxiliarDesligado.setText("Desligado");
+				rdbtnModoManualAuxiliarDesligado.setSelected(true);
 				lblBorderAuxiliarManual.add(rdbtnModoManualAuxiliarDesligado);
 		
 				
@@ -811,6 +814,10 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
+				//PREPARANDO VIEW DO FRAME
+				//*****************************************
+				btnSalvar.setEnabled(false);
+				//*****************************************
 				
 				//SE O MODO É MANUAL/INTERMITENTE, NÃO TEM PROBLEMA DE COLISÃO DE HORÁRIO
 				if(!rdbtnModoContinuo.isSelected()) getComandoBA();
@@ -830,6 +837,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			}
 			
 		});
+		btnSalvar.setEnabled(true);
 		contentPane.add(btnSalvar);
 		
 		
@@ -844,115 +852,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 ///////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	//GETTERS
-	public void getRdbtnModoManualIsSelected() {
-		
-		//MANUAL
-		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Manual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Manual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		rdbtnModoManualCilindroLigado.setSelected(true);
-		rdbtnModoManualVentiladorLigado.setSelected(true);
-		rdbtnModoManualAuxiliarLigado.setSelected(true);
-		
-		//INTERMITENTE
-		lblBorderCilindroIntermitente.setEnabled(false);
-		spnModoIntermitenteCilindroLigado.setEnabled(false);
-		spnModoIntermitenteCilindroLigado.setValue(1);
-		spnModoIntermitenteCilindroDesligado.setEnabled(false);
-		spnModoIntermitenteCilindroDesligado.setValue(1);
-		lblBorderVentiladorIntermitente.setEnabled(false);
-		spnModoIntermitenteVentiladorLigado.setEnabled(false);
-		spnModoIntermitenteVentiladorLigado.setValue(1);
-		spnModoIntermitenteVentiladorDesligado.setEnabled(false);
-		spnModoIntermitenteVentiladorDesligado.setValue(1);
-		
-		//CONTÍNUO
-		lblBorderCilindroContinuo.setEnabled(false);
-		txfModoContinuoCilindroLigado.setEnabled(false);
-		txfModoContinuoCilindroLigado.setText("0000");
-		txfModoContinuoCilindroDesligado.setEnabled(false);
-		txfModoContinuoCilindroDesligado.setText("0000");
-		lblBorderVentiladorContinuo.setEnabled(false);
-		txfModoContinuoVentiladorLigado.setEnabled(false);
-		txfModoContinuoVentiladorLigado.setText("0000");
-		txfModoContinuoVentiladorDesligado.setEnabled(false);
-		txfModoContinuoVentiladorDesligado.setText("0000");
-		
-	}
-	
-
-	public void getRdbtnModoIntermitenteIsSelected() {
-				
-		//MANUAL
-		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		rdbtnModoManualCilindroLigado.setSelected(true);
-		rdbtnModoManualVentiladorLigado.setSelected(true);
-		rdbtnModoManualAuxiliarLigado.setSelected(true);
-		
-		//INTERMITENTE
-		lblBorderCilindroIntermitente.setEnabled(true);
-		spnModoIntermitenteCilindroLigado.setEnabled(true);
-		spnModoIntermitenteCilindroLigado.setValue(1);
-		spnModoIntermitenteCilindroDesligado.setEnabled(true);
-		spnModoIntermitenteCilindroDesligado.setValue(1);
-		lblBorderVentiladorIntermitente.setEnabled(true);
-		spnModoIntermitenteVentiladorLigado.setEnabled(true);
-		spnModoIntermitenteVentiladorLigado.setValue(1);
-		spnModoIntermitenteVentiladorDesligado.setEnabled(true);
-		spnModoIntermitenteVentiladorDesligado.setValue(1);
-		
-		//CONTÍNUO
-		lblBorderCilindroContinuo.setEnabled(false);
-		txfModoContinuoCilindroLigado.setEnabled(false);
-		txfModoContinuoCilindroLigado.setText("0000");
-		txfModoContinuoCilindroDesligado.setEnabled(false);
-		txfModoContinuoCilindroDesligado.setText("0000");
-		lblBorderVentiladorContinuo.setEnabled(false);
-		txfModoContinuoVentiladorLigado.setEnabled(false);
-		txfModoContinuoVentiladorLigado.setText("0000");
-		txfModoContinuoVentiladorDesligado.setEnabled(false);
-		txfModoContinuoVentiladorDesligado.setText("0000");
-				
-	}
-
-
-	public void getRdbtnModoContinuoIsSelected() {
-		
-		//MANUAL
-		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		rdbtnModoManualCilindroLigado.setSelected(true);
-		rdbtnModoManualVentiladorLigado.setSelected(true);
-		rdbtnModoManualAuxiliarLigado.setSelected(true);
-		
-		//INTERMITENTE
-		lblBorderCilindroIntermitente.setEnabled(false);
-		spnModoIntermitenteCilindroLigado.setEnabled(false);
-		spnModoIntermitenteCilindroLigado.setValue(1);
-		spnModoIntermitenteCilindroDesligado.setEnabled(false);
-		spnModoIntermitenteCilindroDesligado.setValue(1);
-		lblBorderVentiladorIntermitente.setEnabled(false);
-		spnModoIntermitenteVentiladorLigado.setEnabled(false);
-		spnModoIntermitenteVentiladorLigado.setValue(1);
-		spnModoIntermitenteVentiladorDesligado.setEnabled(false);
-		spnModoIntermitenteVentiladorDesligado.setValue(1);
-		
-		//CONTÍNUO
-		lblBorderCilindroContinuo.setEnabled(true);
-		txfModoContinuoCilindroLigado.setEnabled(true);
-		txfModoContinuoCilindroLigado.setText("0000");
-		txfModoContinuoCilindroDesligado.setEnabled(true);
-		txfModoContinuoCilindroDesligado.setText("0000");
-		lblBorderVentiladorContinuo.setEnabled(true);
-		txfModoContinuoVentiladorLigado.setEnabled(true);
-		txfModoContinuoVentiladorLigado.setText("0000");
-		txfModoContinuoVentiladorDesligado.setEnabled(true);
-		txfModoContinuoVentiladorDesligado.setText("0000");
-				
-	}
-	
-	
+	//GETTERS	
 	public void getComandoBA() {
 		
 		//FORMATO
@@ -1337,9 +1237,46 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	
 	
 	//SETTERS	
+	public void setBtnSalvarEnabled(boolean enabled) {
+		
+		btnSalvar.setEnabled(enabled);
+		
+	}
+	
 	public void setRdbtnModoManualSelected(boolean selected) {
 		
 		rdbtnModoManual.setSelected(selected);
+		///
+		//MANUAL
+		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Manual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Manual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		rdbtnModoManualCilindroDesligado.setSelected(true);
+		rdbtnModoManualVentiladorDesligado.setSelected(true);
+		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		
+		//INTERMITENTE
+		lblBorderCilindroIntermitente.setEnabled(false);
+		spnModoIntermitenteCilindroLigado.setEnabled(false);
+		spnModoIntermitenteCilindroLigado.setValue(1);
+		spnModoIntermitenteCilindroDesligado.setEnabled(false);
+		spnModoIntermitenteCilindroDesligado.setValue(1);
+		lblBorderVentiladorIntermitente.setEnabled(false);
+		spnModoIntermitenteVentiladorLigado.setEnabled(false);
+		spnModoIntermitenteVentiladorLigado.setValue(1);
+		spnModoIntermitenteVentiladorDesligado.setEnabled(false);
+		spnModoIntermitenteVentiladorDesligado.setValue(1);
+		
+		//CONTÍNUO
+		lblBorderCilindroContinuo.setEnabled(false);
+		txfModoContinuoCilindroLigado.setEnabled(false);
+		txfModoContinuoCilindroLigado.setText("0000");
+		txfModoContinuoCilindroDesligado.setEnabled(false);
+		txfModoContinuoCilindroDesligado.setText("0000");
+		lblBorderVentiladorContinuo.setEnabled(false);
+		txfModoContinuoVentiladorLigado.setEnabled(false);
+		txfModoContinuoVentiladorLigado.setText("0000");
+		txfModoContinuoVentiladorDesligado.setEnabled(false);
+		txfModoContinuoVentiladorDesligado.setText("0000");
 		
 	}
 	
@@ -1347,6 +1284,147 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	public void setRdbtnModoIntermitenteSelected(boolean selected) {
 		
 		rdbtnModoIntermitente.setSelected(selected);
+		///
+		//MANUAL
+		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		rdbtnModoManualCilindroDesligado.setSelected(true);
+		rdbtnModoManualVentiladorDesligado.setSelected(true);
+		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		
+		//INTERMITENTE
+		lblBorderCilindroIntermitente.setEnabled(true);
+		spnModoIntermitenteCilindroLigado.setEnabled(true);
+		spnModoIntermitenteCilindroLigado.setValue(1);
+		spnModoIntermitenteCilindroDesligado.setEnabled(true);
+		spnModoIntermitenteCilindroDesligado.setValue(1);
+		lblBorderVentiladorIntermitente.setEnabled(true);
+		spnModoIntermitenteVentiladorLigado.setEnabled(true);
+		spnModoIntermitenteVentiladorLigado.setValue(1);
+		spnModoIntermitenteVentiladorDesligado.setEnabled(true);
+		spnModoIntermitenteVentiladorDesligado.setValue(1);
+		
+		//CONTÍNUO
+		lblBorderCilindroContinuo.setEnabled(false);
+		txfModoContinuoCilindroLigado.setEnabled(false);
+		txfModoContinuoCilindroLigado.setText("0000");
+		txfModoContinuoCilindroDesligado.setEnabled(false);
+		txfModoContinuoCilindroDesligado.setText("0000");
+		lblBorderVentiladorContinuo.setEnabled(false);
+		txfModoContinuoVentiladorLigado.setEnabled(false);
+		txfModoContinuoVentiladorLigado.setText("0000");
+		txfModoContinuoVentiladorDesligado.setEnabled(false);
+		txfModoContinuoVentiladorDesligado.setText("0000");
+				
+	}
+	
+	public void setRdbtnModoContinuoSelected(boolean selected) {
+		
+		rdbtnModoContinuo.setSelected(selected);
+		///
+		//MANUAL
+		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		rdbtnModoManualCilindroDesligado.setSelected(true);
+		rdbtnModoManualVentiladorDesligado.setSelected(true);
+		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		
+		//INTERMITENTE
+		lblBorderCilindroIntermitente.setEnabled(false);
+		spnModoIntermitenteCilindroLigado.setEnabled(false);
+		spnModoIntermitenteCilindroLigado.setValue(1);
+		spnModoIntermitenteCilindroDesligado.setEnabled(false);
+		spnModoIntermitenteCilindroDesligado.setValue(1);
+		lblBorderVentiladorIntermitente.setEnabled(false);
+		spnModoIntermitenteVentiladorLigado.setEnabled(false);
+		spnModoIntermitenteVentiladorLigado.setValue(1);
+		spnModoIntermitenteVentiladorDesligado.setEnabled(false);
+		spnModoIntermitenteVentiladorDesligado.setValue(1);
+		
+		//CONTÍNUO
+		lblBorderCilindroContinuo.setEnabled(true);
+		txfModoContinuoCilindroLigado.setEnabled(true);
+		txfModoContinuoCilindroLigado.setText("0000");
+		txfModoContinuoCilindroDesligado.setEnabled(true);
+		txfModoContinuoCilindroDesligado.setText("0000");
+		lblBorderVentiladorContinuo.setEnabled(true);
+		txfModoContinuoVentiladorLigado.setEnabled(true);
+		txfModoContinuoVentiladorLigado.setText("0000");
+		txfModoContinuoVentiladorDesligado.setEnabled(true);
+		txfModoContinuoVentiladorDesligado.setText("0000");
+		
+	}
+	
+	public void setRdbtnModoManualCilindroLigadoSelected(boolean selected) {
+		
+		if(selected) rdbtnModoManualCilindroLigado.setSelected(true);
+		else rdbtnModoManualCilindroDesligado.setSelected(true);
+		
+	}
+	
+	public void setRdbtnModoManualVentiladorLigadoSelected(boolean selected) {
+		
+		if(selected) rdbtnModoManualVentiladorLigado.setSelected(true);
+		else rdbtnModoManualVentiladorDesligado.setSelected(true);
+		
+	}
+	
+	public void setRdbtnModoManualAuxiliarLigadoSelected(boolean selected) {
+		
+		if(selected) rdbtnModoManualAuxiliarLigado.setSelected(true);
+		else rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		
+	}
+	
+	public void setSpnModoIntermitenteCilindroLigadoValue(int value) {
+		
+		if(value <= 0) spnModoIntermitenteCilindroLigado.setValue(1); //MODO-INTERMITENTE, MENOR VALOR POSSÍVEL É 1 [minuto]
+		else spnModoIntermitenteCilindroLigado.setValue(value);
+		
+	}
+	
+	public void setSpnModoIntermitenteCilindroDesligadoValue(int value) {
+		
+		if(value <= 0) spnModoIntermitenteCilindroDesligado.setValue(1); //MODO-INTERMITENTE, MENOR VALOR POSSÍVEL É 1 [minuto]
+		else spnModoIntermitenteCilindroDesligado.setValue(value);
+		
+	}
+	
+	public void setSpnModoIntermitenteVentiladorLigadoValue(int value) {
+		
+		if(value <= 0) spnModoIntermitenteVentiladorLigado.setValue(1); //MODO-INTERMITENTE, MENOR VALOR POSSÍVEL É 1 [minuto]
+		else spnModoIntermitenteVentiladorLigado.setValue(value);
+		
+	}
+	
+	public void setSpnModoIntermitenteVentiladorDesligadoValue(int value) {
+		
+		if(value <= 0) spnModoIntermitenteVentiladorDesligado.setValue(1); //MODO-INTERMITENTE, MENOR VALOR POSSÍVEL É 1 [minuto]
+		else spnModoIntermitenteVentiladorDesligado.setValue(value);
+		
+	}
+	
+	public void setTxfModoContinuoCilindroLigadoText(String text) {
+		
+		txfModoContinuoCilindroLigado.setText(text);
+		
+	}
+	
+	public void setTxfModoContinuoCilindroDesligadoText(String text) {
+		
+		txfModoContinuoCilindroDesligado.setText(text);
+		
+	}
+	
+	public void setTxfModoContinuoVentiladorLigadoText(String text) {
+		
+		txfModoContinuoVentiladorLigado.setText(text);
+		
+	}
+	
+	public void setTxfModoContinuoVentiladorDesligadoText(String text) {
+		
+		txfModoContinuoVentiladorDesligado.setText(text);
 		
 	}
 	
