@@ -43,6 +43,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class GerenciamentoMotoresFrame extends JFrame {
 
@@ -74,9 +78,11 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	private ButtonGroup rdgrpModoManualCilindro;
 	//CILINDRO-INTERMITENTE
 	private JLabel lblBorderCilindroIntermitente;
+	private JLabel lblModoIntermitenteCilindroLigadoHoras;
 	private JLabel lblModoIntermitenteCilindroLigado;
 	private JSpinner spnModoIntermitenteCilindroLigado;
 	private JLabel lblModoIntermitenteCilindroLigadoMinutos;
+	private JLabel lblModoIntermitenteCilindroDesligadoHoras;
 	private JLabel lblModoIntermitenteCilindroDesligado;
 	private JSpinner spnModoIntermitenteCilindroDesligado;
 	private JLabel lblModoIntermitenteCilindroDesligadoMinutos;
@@ -98,9 +104,11 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	private ButtonGroup rdgrpModoManualVentilador;
 	//VENTILADOR-INTERMITENTE
 	private JLabel lblBorderVentiladorIntermitente;
+	private JLabel lblModoIntermitenteVentiladorLigadoHoras;
 	private JLabel lblModoIntermitenteVentiladorLigado;
 	private JSpinner spnModoIntermitenteVentiladorLigado;
 	private JLabel lblModoIntermitenteVentiladorLigadoMinutos;
+	private JLabel lblModoIntermitenteVentiladorDesligadoHoras;
 	private JLabel lblModoIntermitenteVentiladorDesligado;
 	private JSpinner spnModoIntermitenteVentiladorDesligado;
 	private JLabel lblModoIntermitenteVentiladorDesligadoMinutos;
@@ -151,6 +159,16 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GerenciamentoMotoresFrame() {
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				
+				gerenciamentoMotoresListener.windowClosed();
+				
+			}
+			
+		});
 		
 		setTitle("Tela - Gerenciamento de Motores");
 		//<CRIANDO ICONE PARA APLICAÇÃO
@@ -290,6 +308,14 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			lblBorderCilindroIntermitente.setEnabled(false);
 			lblCilindro.add(lblBorderCilindroIntermitente);
 		
+			
+				//LBL-MODO-INTERMITENTE-CILINDRO-LIGADO-HORAS
+				lblModoIntermitenteCilindroLigadoHoras = new JLabel();
+				lblModoIntermitenteCilindroLigadoHoras.setBounds(17, 20, 55, 30);
+				lblModoIntermitenteCilindroLigadoHoras.setText("");
+				lblModoIntermitenteCilindroLigadoHoras.setVisible(false);
+				lblBorderCilindroIntermitente.add(lblModoIntermitenteCilindroLigadoHoras);
+			
 				
 				//LBL-MODO-INTERMITENTE-CILINDRO-LIGADO
 				lblModoIntermitenteCilindroLigado = new JLabel();
@@ -305,6 +331,25 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				spnModoIntermitenteCilindroLigado.setModel(new SpinnerNumberModel(1, 1, 360, 1)); //VALUE, MIN, MAX, STEP
 				spnModoIntermitenteCilindroLigado.setEnabled(false);
 				spnModoIntermitenteCilindroLigado.setValue(1);
+				spnModoIntermitenteCilindroLigado.addChangeListener(new ChangeListener() {
+					
+					public void stateChanged(ChangeEvent arg0) {
+						
+						int horas = 0;
+						int minutos = 0;
+						
+						if((int) spnModoIntermitenteCilindroLigado.getValue() > 59) {
+							
+							horas = (int) spnModoIntermitenteCilindroLigado.getValue() / 60;
+							minutos = (int) spnModoIntermitenteCilindroLigado.getValue() % 60;
+							lblModoIntermitenteCilindroLigadoHoras.setText(String.valueOf(horas) + "h" + String.valueOf(minutos) + "m");
+							lblModoIntermitenteCilindroLigadoHoras.setVisible(true);
+							
+						} else lblModoIntermitenteCilindroLigadoHoras.setVisible(false);
+						
+					}
+					
+				});
 				lblBorderCilindroIntermitente.add(spnModoIntermitenteCilindroLigado);
 				
 				
@@ -316,6 +361,15 @@ public class GerenciamentoMotoresFrame extends JFrame {
 					
 				/////////////////////////////////////////////////////////////
 				
+				
+				//LBL-MODO-INTERMITENTE-CILINDRO-DESLIGADO-HORAS
+				lblModoIntermitenteCilindroDesligadoHoras = new JLabel();
+				lblModoIntermitenteCilindroDesligadoHoras.setBounds(17, 80, 55, 30);
+				lblModoIntermitenteCilindroDesligadoHoras.setText("");
+				lblModoIntermitenteCilindroDesligadoHoras.setVisible(false);
+				lblBorderCilindroIntermitente.add(lblModoIntermitenteCilindroDesligadoHoras);
+				
+				
 				//LBL-MODO-INTERMITENTE-CILINDRO-DESLIGADO
 				lblModoIntermitenteCilindroDesligado = new JLabel();
 				lblModoIntermitenteCilindroDesligado.setBounds(13, 65, 65, 30);
@@ -323,12 +377,32 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				lblModoIntermitenteCilindroDesligado.setText("Desligado");
 				lblBorderCilindroIntermitente.add(lblModoIntermitenteCilindroDesligado);
 				
+				
 				//SPN-MODO-INTERMITENTE-CILINDRO-DESLIGADO
 				spnModoIntermitenteCilindroDesligado = new JSpinner();
 				spnModoIntermitenteCilindroDesligado.setBounds(73, 65, 55, 30);
 				spnModoIntermitenteCilindroDesligado.setModel(new SpinnerNumberModel(1, 1, 360, 1)); //VALUE, MIN, MAX, STEP
 				spnModoIntermitenteCilindroDesligado.setEnabled(false);
 				spnModoIntermitenteCilindroDesligado.setValue(1);
+				spnModoIntermitenteCilindroDesligado.addChangeListener(new ChangeListener() {
+					
+					public void stateChanged(ChangeEvent arg0) {
+						
+						int horas = 0;
+						int minutos = 0;
+						
+						if((int) spnModoIntermitenteCilindroDesligado.getValue() > 59) {
+							
+							horas = (int) spnModoIntermitenteCilindroDesligado.getValue() / 60;
+							minutos = (int) spnModoIntermitenteCilindroDesligado.getValue() % 60;
+							lblModoIntermitenteCilindroDesligadoHoras.setText(String.valueOf(horas) + "h" + String.valueOf(minutos) + "m");
+							lblModoIntermitenteCilindroDesligadoHoras.setVisible(true);
+							
+						} else lblModoIntermitenteCilindroDesligadoHoras.setVisible(false);
+						
+					}
+					
+				});
 				lblBorderCilindroIntermitente.add(spnModoIntermitenteCilindroDesligado);
 				
 				
@@ -529,6 +603,14 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			lblVentilador.add(lblBorderVentiladorIntermitente);
 		
 				
+				//LBL-MODO-INTERMITENTE-VENTILADOR-LIGADO-HORAS
+				lblModoIntermitenteVentiladorLigadoHoras = new JLabel();
+				lblModoIntermitenteVentiladorLigadoHoras.setBounds(17, 20, 55, 30);
+				lblModoIntermitenteVentiladorLigadoHoras.setText("xxhxxm");
+				lblModoIntermitenteVentiladorLigadoHoras.setVisible(false);
+				lblBorderVentiladorIntermitente.add(lblModoIntermitenteVentiladorLigadoHoras);
+			
+				
 				//LBL-MODO-INTERMITENTE-VENTILADOR-LIGADO
 				lblModoIntermitenteVentiladorLigado = new JLabel();
 				lblModoIntermitenteVentiladorLigado.setBounds(20, 35, 55, 30);
@@ -543,6 +625,25 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				spnModoIntermitenteVentiladorLigado.setModel(new SpinnerNumberModel(1, 1, 360, 1)); //VALUE, MIN, MAX, STEP
 				spnModoIntermitenteVentiladorLigado.setEnabled(false);
 				spnModoIntermitenteVentiladorLigado.setValue(1);
+				spnModoIntermitenteVentiladorLigado.addChangeListener(new ChangeListener() {
+					
+					public void stateChanged(ChangeEvent arg0) {
+						
+						int horas = 0;
+						int minutos = 0;
+						
+						if((int) spnModoIntermitenteVentiladorLigado.getValue() > 59) {
+							
+							horas = (int) spnModoIntermitenteVentiladorLigado.getValue() / 60;
+							minutos = (int) spnModoIntermitenteVentiladorLigado.getValue() % 60;
+							lblModoIntermitenteVentiladorLigadoHoras.setText(String.valueOf(horas) + "h" + String.valueOf(minutos) + "m");
+							lblModoIntermitenteVentiladorLigadoHoras.setVisible(true);
+							
+						} else lblModoIntermitenteVentiladorLigadoHoras.setVisible(false);
+						
+					}
+					
+				});
 				lblBorderVentiladorIntermitente.add(spnModoIntermitenteVentiladorLigado);
 				
 				
@@ -553,6 +654,15 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				lblBorderVentiladorIntermitente.add(lblModoIntermitenteVentiladorLigadoMinutos);
 					
 				/////////////////////////////////////////////////////////////
+				
+				
+				//LBL-MODO-INTERMITENTE-VENTILADOR-DESLIGADO-HORAS
+				lblModoIntermitenteVentiladorDesligadoHoras = new JLabel();
+				lblModoIntermitenteVentiladorDesligadoHoras.setBounds(17, 80, 55, 30);
+				lblModoIntermitenteVentiladorDesligadoHoras.setText("xxhxxm");
+				lblModoIntermitenteVentiladorDesligadoHoras.setVisible(false);
+				lblBorderVentiladorIntermitente.add(lblModoIntermitenteVentiladorDesligadoHoras);
+				
 				
 				//LBL-MODO-INTERMITENTE-VENTILADOR-DESLIGADO
 				lblModoIntermitenteVentiladorDesligado = new JLabel();
@@ -567,6 +677,25 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				spnModoIntermitenteVentiladorDesligado.setModel(new SpinnerNumberModel(1, 1, 360, 1)); //VALUE, MIN, MAX, STEP
 				spnModoIntermitenteVentiladorDesligado.setEnabled(false);
 				spnModoIntermitenteVentiladorDesligado.setValue(1);
+				spnModoIntermitenteVentiladorDesligado.addChangeListener(new ChangeListener() {
+					
+					public void stateChanged(ChangeEvent arg0) {
+						
+						int horas = 0;
+						int minutos = 0;
+						
+						if((int) spnModoIntermitenteVentiladorDesligado.getValue() > 59) {
+							
+							horas = (int) spnModoIntermitenteVentiladorDesligado.getValue() / 60;
+							minutos = (int) spnModoIntermitenteVentiladorDesligado.getValue() % 60;
+							lblModoIntermitenteVentiladorDesligadoHoras.setText(String.valueOf(horas) + "h" + String.valueOf(minutos) + "m");
+							lblModoIntermitenteVentiladorDesligadoHoras.setVisible(true);
+							
+						} else lblModoIntermitenteVentiladorDesligadoHoras.setVisible(false);
+						
+					}
+					
+				});
 				lblBorderVentiladorIntermitente.add(spnModoIntermitenteVentiladorDesligado);
 				
 				
@@ -828,9 +957,25 @@ public class GerenciamentoMotoresFrame extends JFrame {
 					String txfVentiladorTimeON = txfModoContinuoVentiladorLigado.getText().substring(0, 2) + txfModoContinuoVentiladorLigado.getText().substring(3, 5);
 					String txfVentiladorTimeOFF = txfModoContinuoVentiladorDesligado.getText().substring(0, 2) + txfModoContinuoVentiladorDesligado.getText().substring(3, 5);
 					
-					if(txfCilindroTimeON.equals(txfCilindroTimeOFF)) JOptionPane.showMessageDialog(null, "Horário de Ligado e Desligado do Cilindro são os mesmos.\n Altere para horários diferentes e tente novamente.", "[Cilindro] Alerta - Horários Iguais", JOptionPane.WARNING_MESSAGE);
-					else if(txfVentiladorTimeON.equals(txfVentiladorTimeOFF)) JOptionPane.showMessageDialog(null, "Horário de Ligado e Desligado do Ventilador são os mesmos.\n Altere para horários diferentes e tente novamente.", "[Ventilador] Alerta - Horários Iguais", JOptionPane.WARNING_MESSAGE);
-					else getComandoBA();
+					if(txfCilindroTimeON.equals(txfCilindroTimeOFF)) {
+						
+						JOptionPane.showMessageDialog(null, "Horário de Ligado e Desligado do Cilindro são os mesmos.\n Altere para horários diferentes e tente novamente.", "[Cilindro] Alerta - Horários Iguais", JOptionPane.WARNING_MESSAGE);
+						
+						//PREPARANDO VIEW DO FRAME
+						//*****************************************
+						btnSalvar.setEnabled(true);
+						//*****************************************
+						
+					} else if(txfVentiladorTimeON.equals(txfVentiladorTimeOFF)) {
+						
+						JOptionPane.showMessageDialog(null, "Horário de Ligado e Desligado do Ventilador são os mesmos.\n Altere para horários diferentes e tente novamente.", "[Ventilador] Alerta - Horários Iguais", JOptionPane.WARNING_MESSAGE);
+						
+						//PREPARANDO VIEW DO FRAME
+						//*****************************************
+						btnSalvar.setEnabled(true);
+						//*****************************************
+						
+					} else getComandoBA();
 					
 				}
 				
@@ -866,11 +1011,14 @@ public class GerenciamentoMotoresFrame extends JFrame {
 		//******
 		String dadoByte1Binary = new String();
 		String dadoByte1Hex = new String();
-		//BYTE-1 [BITs-7-6-5-4: ModoOperação-Sensor2-Sensor1-ModoOperaçãoDaAuxiliar - Utilizados apenas na Leitura]
-		dadoByte1Binary = "0000";
-		//BYTE-1 [BITs-3-2: VentiladorStart-CilindroStart - Utilizados apenas nos Modos Intermitente e Contínuo]
+		//BYTE-1 [BITs-7-6-5: ModoOperação-Sensor2-Sensor1 - Utilizados apenas na Leitura]
+		dadoByte1Binary = "000";
+		//BYTE-1 [BITs-4-3-2: AuxiliarStart-VentiladorStart-CilindroStart - Utilizados nos Modos Intermitente e Contínuo]
 		if(!rdbtnModoManual.isSelected()) {
 			
+			//BYTE-1 [BIT-4: AuxliarSituaçãoInicialON/OFF]
+			if(rdbtnModoManualAuxiliarLigado.isSelected()) dadoByte1Binary += "1";
+			else dadoByte1Binary += "0";
 			//BYTE-1 [BIT-3: VentiladorSituaçãoInicialON/OFF]
 			if(rdbtnModoManualVentiladorLigado.isSelected()) dadoByte1Binary += "1";
 			else dadoByte1Binary += "0";
@@ -878,7 +1026,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			if(rdbtnModoManualCilindroLigado.isSelected()) dadoByte1Binary += "1";
 			else dadoByte1Binary += "0";
 			
-		} else dadoByte1Binary += "00";
+		} else dadoByte1Binary += "000"; //STATUS DAS SAÍDAS SERÃO CONFIGURADOS NO BYTE-2 [BITs-2-1-0]
 		
 		
 		//BYTE-1 [BIT-1-0: ModoFundionamentoManual/Intermitente/Contínuo]
@@ -1253,6 +1401,13 @@ public class GerenciamentoMotoresFrame extends JFrame {
 		rdbtnModoManualCilindroDesligado.setSelected(true);
 		rdbtnModoManualVentiladorDesligado.setSelected(true);
 		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		///
+		rdbtnModoManualCilindroLigado.setEnabled(true);
+		rdbtnModoManualCilindroDesligado.setEnabled(true);
+		rdbtnModoManualVentiladorLigado.setEnabled(true);
+		rdbtnModoManualVentiladorDesligado.setEnabled(true);
+		rdbtnModoManualAuxiliarLigado.setEnabled(true);
+		rdbtnModoManualAuxiliarDesligado.setEnabled(true);
 		
 		//INTERMITENTE
 		lblBorderCilindroIntermitente.setEnabled(false);
@@ -1291,6 +1446,13 @@ public class GerenciamentoMotoresFrame extends JFrame {
 		rdbtnModoManualCilindroDesligado.setSelected(true);
 		rdbtnModoManualVentiladorDesligado.setSelected(true);
 		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		///
+		rdbtnModoManualCilindroLigado.setEnabled(true);
+		rdbtnModoManualCilindroDesligado.setEnabled(true);
+		rdbtnModoManualVentiladorLigado.setEnabled(true);
+		rdbtnModoManualVentiladorDesligado.setEnabled(true);
+		rdbtnModoManualAuxiliarLigado.setEnabled(true);
+		rdbtnModoManualAuxiliarDesligado.setEnabled(true);
 		
 		//INTERMITENTE
 		lblBorderCilindroIntermitente.setEnabled(true);
@@ -1323,11 +1485,16 @@ public class GerenciamentoMotoresFrame extends JFrame {
 		rdbtnModoContinuo.setSelected(selected);
 		///
 		//MANUAL
-		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
-		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Iniciar", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		lblBorderCilindroManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Estado Atual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
+		lblBorderVentiladorManual.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Estado Atual", TitledBorder.CENTER, TitledBorder.BELOW_TOP, null, new Color(0, 0, 0)));
 		rdbtnModoManualCilindroDesligado.setSelected(true);
 		rdbtnModoManualVentiladorDesligado.setSelected(true);
 		rdbtnModoManualAuxiliarDesligado.setSelected(true);
+		///
+		rdbtnModoManualCilindroLigado.setEnabled(false);
+		rdbtnModoManualCilindroDesligado.setEnabled(false);
+		rdbtnModoManualVentiladorLigado.setEnabled(false);
+		rdbtnModoManualVentiladorDesligado.setEnabled(false);
 		
 		//INTERMITENTE
 		lblBorderCilindroIntermitente.setEnabled(false);
@@ -1352,6 +1519,48 @@ public class GerenciamentoMotoresFrame extends JFrame {
 		txfModoContinuoVentiladorLigado.setText("0000");
 		txfModoContinuoVentiladorDesligado.setEnabled(true);
 		txfModoContinuoVentiladorDesligado.setText("0000");
+		
+	}
+	
+	public void setRdbtnModoManualCilindroLigadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualCilindroLigado.setEnabled(true);
+		else rdbtnModoManualCilindroLigado.setEnabled(false);
+		
+	}
+	
+	public void setRdbtnModoManualCilindroDesligadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualCilindroDesligado.setEnabled(true);
+		else rdbtnModoManualCilindroDesligado.setEnabled(false);
+		
+	}
+	
+	public void setRdbtnModoManualVentiladorLigadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualVentiladorLigado.setEnabled(true);
+		else rdbtnModoManualVentiladorLigado.setEnabled(false);
+		
+	}
+	
+	public void setRdbtnModoManualVentiladorDesligadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualVentiladorDesligado.setEnabled(true);
+		else rdbtnModoManualVentiladorDesligado.setEnabled(false);
+		
+	}
+	
+	public void setRdbtnModoManualAuxiliarLigadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualAuxiliarLigado.setEnabled(true);
+		else rdbtnModoManualAuxiliarLigado.setEnabled(false);
+		
+	}
+	
+	public void setRdbtnModoManualAuxiliarDesligadoEnabled(boolean enabled) {
+		
+		if(enabled) rdbtnModoManualAuxiliarDesligado.setEnabled(true);
+		else rdbtnModoManualAuxiliarDesligado.setEnabled(false);
 		
 	}
 	
