@@ -135,10 +135,9 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	//%%%%%%%%%%
 	//%%%%%%%%%%
 	//%%%%%%%%%%
-	//TESTE!
-//	private URL urlSecador = GerenciamentoMotoresFrame.class.getResource("images/secadorTudoEstatico.png");
-	private URL urlSecador = GerenciamentoMotoresFrame.class.getResource("images/secador_full1.gif");
-//	private URL urlSecador = GerenciamentoMotoresFrame.class.getResource("images/ventilador_full.gif");
+	private URL urlSecador = GerenciamentoMotoresFrame.class.getResource("images/secadorEmail01.gif");
+	//TESTE
+//	public static URL urlSecador= null;
 	private Icon iconSecador = new ImageIcon(); 
 	private JLabel lblSecador;
 	
@@ -148,7 +147,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	
 	
 	//ATRIBUTOS DE IMAGENS
-	URL urlIconCampotech = GerenciamentoRelatoriosFrame.class.getResource("images/icon-campotech.png");
+	private URL urlIconCampotech = GerenciamentoMotoresFrame.class.getResource("images/icon-campotech.png");
 	
 	
 	//CORES CUSTOMIZADAS
@@ -159,6 +158,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public GerenciamentoMotoresFrame() {
+		
 		addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -888,28 +888,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				rdgrpModoManualAuxiliar.add(rdbtnModoManualAuxiliarDesligado);
 				
 				
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-				//TESTE!
+				//LBLSECADOR [IMAGEM DO SECADOR]
 				lblSecador = new JLabel();
 				lblSecador.setBounds(235, 0, 320, 600);
 				iconSecador = new ImageIcon(urlSecador);
@@ -1385,6 +1364,14 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	
 	
 	//SETTERS	
+	public void setLblSecadorImage(String secadorImagePath) {
+		
+		urlSecador = GerenciamentoMotoresFrame.class.getResource(secadorImagePath);
+		iconSecador = new ImageIcon(urlSecador);
+		lblSecador.setIcon(iconSecador);
+		
+	}
+	
 	public void setBtnSalvarEnabled(boolean enabled) {
 		
 		btnSalvar.setEnabled(enabled);

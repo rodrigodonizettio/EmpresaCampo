@@ -56,8 +56,13 @@ import javax.swing.SwingConstants;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class GerenciamentoSecagemFrame extends JFrame {
-
-
+	
+//	while(flagGerenciamentoSecagemFrameColetarAmostras) {
+//		
+//		zigBeeGerenciamentoSecagemFrameColetarAmostras();
+//		
+//	}
+	
 	//ATRIBUTOS PERTENCENTES AO FRAME
 	private JPanel contentPane;
 	private JLabel lblSecadorELote;
@@ -100,6 +105,9 @@ public class GerenciamentoSecagemFrame extends JFrame {
 	private JLabel lblTempoDescansoValor;
 	private JLabel lblTempoSecagem;
 	private JLabel lblTempoSecagemValor;
+	///
+	private JButton btnColetarAmostras;
+	///
 	private JLabel lblTempoTotal;
 	private JLabel lblTempoTotalValor;
 	private JLabel lblBebida;
@@ -398,39 +406,56 @@ public class GerenciamentoSecagemFrame extends JFrame {
 						
 				//[LABEL] TEMPOS - DESCANSO/SECAGEM/OPERAÇÃO
 				lblTempoDescanso = new JLabel();
-				lblTempoDescanso.setBounds(15, 470, 180, 30);
+				lblTempoDescanso.setBounds(15, 450, 180, 30);
 				lblTempoDescanso.setFont(new Font("Tahoma", Font.BOLD, 15));
 				lblTempoDescanso.setText("Tempo em Descanso:");
 				lblBorderOuter.add(lblTempoDescanso);
 				
 				lblTempoDescansoValor = new JLabel();
-				lblTempoDescansoValor.setBounds(205, 470, 250, 30);
+				lblTempoDescansoValor.setBounds(205, 450, 250, 30);
 				//lblTempoDescansoValor.setForeground(Color.BLUE);
 				lblTempoDescansoValor.setFont(new Font("Tahoma", Font.BOLD, 15));
 				//lblTempoDescansoValor.setText("DD [d] HH [h] MM [m] SS [s] ");
 				lblBorderOuter.add(lblTempoDescansoValor);
 				
 				lblTempoSecagem = new JLabel();
-				lblTempoSecagem.setBounds(15, 430, 180, 30);
+				lblTempoSecagem.setBounds(15, 410, 180, 30);
 				lblTempoSecagem.setFont(new Font("Tahoma", Font.BOLD, 15));
 				lblTempoSecagem.setText("Tempo em Secagem:");
 				lblBorderOuter.add(lblTempoSecagem);
 				
 				lblTempoSecagemValor = new JLabel();
-				lblTempoSecagemValor.setBounds(205, 430, 250, 30);
+				lblTempoSecagemValor.setBounds(205, 410, 250, 30);
 				//lblTempoSecagemValor.setForeground(Color.ORANGE);
 				lblTempoSecagemValor.setFont(new Font("Tahoma", Font.BOLD, 15));
 				//lblTempoSecagemValor.setText("DD [d] HH [h] MM [m] SS [s] ");
 				lblBorderOuter.add(lblTempoSecagemValor);
 				
+				btnColetarAmostras = new JButton();
+				btnColetarAmostras.setBounds(10, 485, 90, 45);
+				btnColetarAmostras.setText("<html><p>&nbsp;&nbsp;Coletar</p><p>Amostras</p></html>");
+				
+				btnColetarAmostras.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+						gerenciamentoSecagemListener.btnColetarAmostrasClicked();
+						
+					}
+					
+				});
+				
+				lblBorderOuter.add(btnColetarAmostras);
+				
+				
 				lblTempoTotal = new JLabel();
-				lblTempoTotal.setBounds(15, 390, 200, 30);
+				lblTempoTotal.setBounds(15, 370, 200, 30);
 				lblTempoTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
 				lblTempoTotal.setText("Tempo Total de Operação:");
 				lblBorderOuter.add(lblTempoTotal);
 				
 				lblTempoTotalValor = new JLabel();
-				lblTempoTotalValor.setBounds(205, 390, 250, 30);
+				lblTempoTotalValor.setBounds(205, 370, 250, 30);
 				//lblTempoTotalValor.setForeground(Color.GREEN);
 				lblTempoTotalValor.setFont(new Font("Tahoma", Font.BOLD, 15));
 				//lblTempoTotalValor.setText("DD [d] HH [h] MM [m] SS [s] ");
@@ -501,7 +526,7 @@ public class GerenciamentoSecagemFrame extends JFrame {
 				
 				
 				prgrssbrColetaAmostra = new JProgressBar();
-				prgrssbrColetaAmostra.setBounds(10, 510, 300, 20);
+				prgrssbrColetaAmostra.setBounds(110, 510, 300, 20);
 				prgrssbrColetaAmostra.setVisible(false);
 				lblBorderOuter.add(prgrssbrColetaAmostra);
 				
@@ -1556,6 +1581,18 @@ public class GerenciamentoSecagemFrame extends JFrame {
 	public void setBtnAcessarMotoresText(String text) {
 		
 		btnAcessarMotores.setText(text);
+		
+	}
+	
+	public void setBtnColetarAmostrasEnabled(boolean enabled) {
+		
+		btnColetarAmostras.setEnabled(enabled);
+		
+	}
+	
+	public void setBtnColetarAmostrasText(String text) {
+		
+		btnColetarAmostras.setText(text);
 		
 	}
 	

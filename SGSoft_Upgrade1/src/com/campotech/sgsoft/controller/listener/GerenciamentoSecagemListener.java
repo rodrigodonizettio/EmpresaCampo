@@ -15,5 +15,8 @@ public interface GerenciamentoSecagemListener {
 	public void btnEditarReceitaClicked();
 	public void btnAtualizarClicked();
 	public void btnAcessarMotoresClicked();
+	///
+	//TESTE @14/09/2016
+	public void btnColetarAmostrasClicked();
 	
 }

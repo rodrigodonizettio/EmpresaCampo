@@ -223,7 +223,7 @@ public class GerenciamentoRelatoriosFrame extends JFrame {
 				
 				public void actionPerformed(ActionEvent arg0) {
 					
-					gerenciamentoRelatoriosListener.btnColetarAmostrasClicked();
+					gerenciamentoRelatoriosListener.btnColetarAmostrasRelatorioClicked();
 					
 				}
 				

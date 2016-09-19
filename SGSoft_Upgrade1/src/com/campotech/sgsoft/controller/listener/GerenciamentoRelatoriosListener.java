@@ -2,7 +2,7 @@ package com.campotech.sgsoft.controller.listener;
 
 public interface GerenciamentoRelatoriosListener {
 	
-	public void btnColetarAmostrasClicked();
+	public void btnColetarAmostrasRelatorioClicked();
 	public void btnExportarPDFClicked();
 	public void btnExportarXLSClicked();
 	
