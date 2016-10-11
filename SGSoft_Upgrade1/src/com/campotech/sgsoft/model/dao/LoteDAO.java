@@ -63,6 +63,7 @@ public class LoteDAO {
     private final String SELECT_ALL_NOME_DESCANSANDO = "SELECT lnome FROM lote WHERE lestado = 2 ORDER BY lnome ASC"; //lestado = 2 => descansando
     private final String SELECT_LOTE_NOME = "SELECT lnome FROM lote WHERE lnome LIKE ?";
     private final String SELECT_LOTE_RECEITAID = "SELECT receita_rid FROM lote WHERE lnome LIKE ?";
+    private final String SELECT_RECEITAID = "SELECT receita_rid FROM lote WHERE secador_sid1 = ?";
     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,6 +282,39 @@ public class LoteDAO {
 		      	
 		  }
 		  
+		  
+		  //SELECT_LOTE_RECEITAID
+		  public int selectReceitaIDBySecadorId1(int secador_sId) {
+		      
+			  int receitaId = -1;
+		      
+		      try {
+		    	  connection = AcessoDB.conectar();
+		    	  preparedStatement = connection.prepareStatement(SELECT_RECEITAID);
+		    	  preparedStatement.setInt(1, secador_sId);
+		      	  resultSet = preparedStatement.executeQuery();
+		     
+		      	  while(resultSet.next()) {
+		      		  
+		      		  receitaId = resultSet.getInt("receita_rid");
+		      		  
+		      		}
+		      	  
+		      } catch (Exception e) {
+		    	  
+		      		System.out.println("Erro: " + e.getMessage());
+		      		e.printStackTrace();
+		      		
+		      	} finally {
+		      		
+		      		System.out.println("Disconnected from PostgreSQL!!");
+		      		AcessoDB.desconectar(connection, preparedStatement, resultSet);
+		      		
+		      	}
+		      
+		      	return receitaId;
+		      	
+		  }
 		  
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

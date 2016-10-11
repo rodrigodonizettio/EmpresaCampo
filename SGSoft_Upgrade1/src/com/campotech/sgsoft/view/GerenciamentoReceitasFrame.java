@@ -37,6 +37,7 @@ import javax.swing.JComboBox;
 
 import com.campotech.sgsoft.controller.listener.GerenciamentoReceitasListener;
 import com.campotech.sgsoft.controller.listener.GerenciamentoUsuariosListener;
+import java.awt.Font;
 
 public class GerenciamentoReceitasFrame extends JFrame {
 
@@ -50,29 +51,41 @@ public class GerenciamentoReceitasFrame extends JFrame {
 	private JCheckBox chkbxEtapa1;
 	private JRadioButton rdbtnTemperaturaMaximaEntrada1;
 	private JSpinner spnTemperaturaMaximaEntrada1;
+	private JLabel lblTemperaturaMaximaEntrada1GrauCelsius;
 	private JRadioButton rdbtnTemperaturaMaximaMassa1;
 	private JSpinner spnTemperaturaMaximaMassa1;
+	private JLabel lblTemperaturaMaximaMassa1GrauCelsius;
 	private ButtonGroup rdgrpTipoControle1;
 	private JLabel lblTempo1;
 	private JSpinner spnTempo1;
+	private JLabel lblTempo1Horas;
+	///
 	private JLabel lblEtapa2;
 	private JCheckBox chkbxEtapa2;
 	private JRadioButton rdbtnTemperaturaMaximaEntrada2;
 	private JSpinner spnTemperaturaMaximaEntrada2;
+	private JLabel lblTemperaturaMaximaEntrada2GrauCelsius;
 	private JRadioButton rdbtnTemperaturaMaximaMassa2;
 	private JSpinner spnTemperaturaMaximaMassa2;
+	private JLabel lblTemperaturaMaximaMassa2GrauCelsius;
 	private ButtonGroup rdgrpTipoControle2;
 	private JLabel lblTempo2;
 	private JSpinner spnTempo2;
+	private JLabel lblTempo2Horas;
+	///
 	private JLabel lblEtapa3;
 	private JCheckBox chkbxEtapa3;
 	private JRadioButton rdbtnTemperaturaMaximaEntrada3;
 	private JSpinner spnTemperaturaMaximaEntrada3;
+	private JLabel lblTemperaturaMaximaEntrada3GrauCelsius;
 	private JRadioButton rdbtnTemperaturaMaximaMassa3;
 	private JSpinner spnTemperaturaMaximaMassa3;
+	private JLabel lblTemperaturaMaximaMassa3GrauCelsius;
 	private ButtonGroup rdgrpTipoControle3;
 	private JLabel lblTempo3;
 	private JSpinner spnTempo3;
+	private JLabel lblTempo3Horas;
+	///
 	private JButton btnCriarReceita;
 	private JButton btnEditarReceita;
 	private JLabel lblReceitasCriadas;
@@ -160,6 +173,12 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaEntrada1.setBounds(184, 28, 55, 25);
 				spnTemperaturaMaximaEntrada1.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa1.add(spnTemperaturaMaximaEntrada1);
+				
+				lblTemperaturaMaximaEntrada1GrauCelsius = new JLabel();
+				lblTemperaturaMaximaEntrada1GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaEntrada1GrauCelsius.setBounds(240, 23, 30, 30);
+				lblTemperaturaMaximaEntrada1GrauCelsius.setText("[°C]");
+				lblEtapa1.add(lblTemperaturaMaximaEntrada1GrauCelsius);
 				
 				rdbtnTemperaturaMaximaMassa1 = new JRadioButton();
 				rdbtnTemperaturaMaximaMassa1.setBounds(30, 60, 160, 20);

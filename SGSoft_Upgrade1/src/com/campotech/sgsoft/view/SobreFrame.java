@@ -50,6 +50,7 @@ public class SobreFrame extends JFrame {
 	private JLabel txlVersao;
 	private String uriWww = "www.campotech.com";
 	private String uriEmail = "mailto:suporte@campotech.com?subject=Suporte";
+	private String uriLinkedin = "https://br.linkedin.com/in/rodrigodonizettideoliveira";
 	private JLabel lblNomeProjetista;
 	
 	
@@ -100,6 +101,16 @@ public class SobreFrame extends JFrame {
 		
 		lblNomeProjetista = new JLabel("Projetista: Rodrigo Donizetti de Oliveira");
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblNomeProjetista, 0, SpringLayout.WEST, contentPane);
+		
+		lblNomeProjetista.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				sobreListener.lblSiteClicked(URI.create(uriLinkedin));
+			}
+			
+		});
+		
 		contentPane.add(lblNomeProjetista);
 		
 		txlNomeEmpresa = new JLabel("High-Z Vale Ind\u00FAstria Eletr\u00F4nica LTDA");
@@ -114,6 +125,7 @@ public class SobreFrame extends JFrame {
 		contentPane.add(txlSac);
 		
 		txlEmail = new JLabel();		
+		txlEmail.setToolTipText("Clique para enviar um e-mail");
 		txlEmail.setForeground(Color.BLUE);
 		txlEmail.setText("suporte@campotech.com");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, txlEmail, 0, SpringLayout.NORTH, txlSac);
@@ -138,6 +150,7 @@ public class SobreFrame extends JFrame {
 		contentPane.add(txlSite);
 		
 		txlWww = new JLabel();
+		txlWww.setToolTipText("Clique para acessar o site");
 		txlWww.setText("www.campotech.com");
 		txlWww.setForeground(Color.BLUE);
 		sl_contentPane.putConstraint(SpringLayout.EAST, txlWww, 129, SpringLayout.WEST, txlEmail);
@@ -156,7 +169,7 @@ public class SobreFrame extends JFrame {
 		
 		contentPane.add(txlWww);
 		
-		txlVersao = new JLabel("v3.8");
+		txlVersao = new JLabel("v3.9");
 		sl_contentPane.putConstraint(SpringLayout.NORTH, lblNomeProjetista, 0, SpringLayout.NORTH, txlVersao);
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, txlVersao, 0, SpringLayout.SOUTH, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, txlVersao, 0, SpringLayout.EAST, contentPane);

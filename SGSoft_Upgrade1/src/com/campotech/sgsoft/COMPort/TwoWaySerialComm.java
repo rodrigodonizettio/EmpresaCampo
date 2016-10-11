@@ -499,7 +499,6 @@ public class TwoWaySerialComm {
     		return "";
     	}
 */    	
-    	
     	return listaDeDados;
     			
     }

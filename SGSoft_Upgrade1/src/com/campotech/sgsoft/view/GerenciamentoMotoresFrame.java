@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -52,6 +53,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	public static boolean flagGerenciamentoMotoresFrameEditar = false;
 	public static boolean flagGerenciamentoSecagemFrameSetStatusMotores = false; //FLAG PARA ENVIO DE CONFIGURAÇÃO AOS MOTORES
 	public static String comandoBA = new String();
 	
@@ -131,6 +133,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	//%%%%%%%%%%
 	//%%%%%%%%%%
 	//%%%%%%%%%%
+	private JToggleButton tglbtnEditar;
 	private JButton btnSalvar;
 	//%%%%%%%%%%
 	//%%%%%%%%%%
@@ -152,7 +155,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 	
 	//CORES CUSTOMIZADAS
 	Color VERDE_ESCURO = new Color(0, 193, 0); //0, 128, 0 => VERDE ESCURÃO
-	
+
 		
 	/**
 	 * Create the frame.
@@ -164,6 +167,17 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				
+				tglbtnEditar.setSelected(false);
+				btnSalvar.setEnabled(false);
+				gerenciamentoMotoresListener.windowClosed();
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				
+				tglbtnEditar.setSelected(false);
+				btnSalvar.setEnabled(false);
 				gerenciamentoMotoresListener.windowClosed();
 				
 			}
@@ -894,6 +908,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				iconSecador = new ImageIcon(urlSecador);
 				lblSecador.setIcon(iconSecador);
 				contentPane.add(lblSecador);
+		
 				
 				
 				
@@ -906,12 +921,43 @@ public class GerenciamentoMotoresFrame extends JFrame {
 				
 				
 				
+		//BTN-EDITAR
+		tglbtnEditar = new JToggleButton();		
+		tglbtnEditar.setBounds(635, 523, 70, 40);
+		tglbtnEditar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		tglbtnEditar.setText("Editar");
+		tglbtnEditar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
 				
+				if(tglbtnEditar.isSelected()) {
+					
+					btnSalvar.setEnabled(true);
+					flagGerenciamentoMotoresFrameEditar = true;
+					
+				} else {
+					
+					btnSalvar.setEnabled(false);
+					flagGerenciamentoMotoresFrameEditar = false;
+					
+				}
 				
+			}
+			
+		});
+		tglbtnEditar.setSelected(false);
+		tglbtnEditar.setEnabled(true);
+		contentPane.add(tglbtnEditar);		
 				
 				
 		
 		
+		
+		
+		
+		
+		
+				
 		
 		//BTN-SALVAR
 		btnSalvar = new JButton();		
@@ -961,7 +1007,7 @@ public class GerenciamentoMotoresFrame extends JFrame {
 			}
 			
 		});
-		btnSalvar.setEnabled(true);
+		btnSalvar.setEnabled(false);
 		contentPane.add(btnSalvar);
 		
 		
