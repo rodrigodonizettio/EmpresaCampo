@@ -176,7 +176,7 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				
 				lblTemperaturaMaximaEntrada1GrauCelsius = new JLabel();
 				lblTemperaturaMaximaEntrada1GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblTemperaturaMaximaEntrada1GrauCelsius.setBounds(240, 23, 30, 30);
+				lblTemperaturaMaximaEntrada1GrauCelsius.setBounds(240, 24, 30, 30);
 				lblTemperaturaMaximaEntrada1GrauCelsius.setText("[°C]");
 				lblEtapa1.add(lblTemperaturaMaximaEntrada1GrauCelsius);
 				
@@ -194,6 +194,12 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaMassa1.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa1.add(spnTemperaturaMaximaMassa1);
 				
+				lblTemperaturaMaximaMassa1GrauCelsius = new JLabel();
+				lblTemperaturaMaximaMassa1GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaMassa1GrauCelsius.setBounds(240, 54, 30, 30);
+				lblTemperaturaMaximaMassa1GrauCelsius.setText("[°C]");
+				lblEtapa1.add(lblTemperaturaMaximaMassa1GrauCelsius);
+				
 				lblTempo1 = new JLabel();
 				lblTempo1.setBounds(125, 91, 50, 20);
 				lblTempo1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -205,6 +211,11 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTempo1.setModel(new SpinnerNumberModel(24, 1, 72, 1));
 				lblEtapa1.add(spnTempo1);
 				
+				lblTempo1Horas = new JLabel();
+				lblTempo1Horas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTempo1Horas.setBounds(240, 87, 30, 30);
+				lblTempo1Horas.setText("[h]");
+				lblEtapa1.add(lblTempo1Horas);
 				
 			lblEtapa2 = new JLabel();
 			lblEtapa2.setBounds(37, 205, 273, 130);
@@ -220,7 +231,28 @@ public class GerenciamentoReceitasFrame extends JFrame {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						
+						//@11-10-2016
+						///
+						if(chkbxEtapa2.isSelected()) {
+						
+							lblTemperaturaMaximaEntrada2GrauCelsius.setEnabled(true);
+							lblTemperaturaMaximaMassa2GrauCelsius.setEnabled(true);
+							lblTempo2Horas.setEnabled(true);
+							
+						} else {
+							
+							lblTemperaturaMaximaEntrada2GrauCelsius.setEnabled(false);
+							lblTemperaturaMaximaMassa2GrauCelsius.setEnabled(false);
+							lblTempo2Horas.setEnabled(false);
+							///
+							lblTemperaturaMaximaEntrada3GrauCelsius.setEnabled(false);
+							lblTemperaturaMaximaMassa3GrauCelsius.setEnabled(false);
+							lblTempo3Horas.setEnabled(false);
+							
+						}						
+						///
 						gerenciamentoReceitasListener.chkbxEtapa2Clicked();
+						
 						
 					}
 					
@@ -241,6 +273,13 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaEntrada2.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa2.add(spnTemperaturaMaximaEntrada2);
 				
+				lblTemperaturaMaximaEntrada2GrauCelsius = new JLabel();
+				lblTemperaturaMaximaEntrada2GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaEntrada2GrauCelsius.setBounds(240, 24, 30, 30);
+				lblTemperaturaMaximaEntrada2GrauCelsius.setText("[°C]");
+				lblTemperaturaMaximaEntrada2GrauCelsius.setEnabled(false);
+				lblEtapa2.add(lblTemperaturaMaximaEntrada2GrauCelsius);
+				
 				rdbtnTemperaturaMaximaMassa2 = new JRadioButton();
 				rdbtnTemperaturaMaximaMassa2.setBounds(30, 60, 160, 20);
 				rdbtnTemperaturaMaximaMassa2.setEnabled(false);
@@ -257,6 +296,13 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaMassa2.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa2.add(spnTemperaturaMaximaMassa2);
 				
+				lblTemperaturaMaximaMassa2GrauCelsius = new JLabel();
+				lblTemperaturaMaximaMassa2GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaMassa2GrauCelsius.setBounds(240, 54, 30, 30);
+				lblTemperaturaMaximaMassa2GrauCelsius.setText("[°C]");
+				lblTemperaturaMaximaMassa2GrauCelsius.setEnabled(false);
+				lblEtapa2.add(lblTemperaturaMaximaMassa2GrauCelsius);
+				
 				lblTempo2 = new JLabel();
 				lblTempo2.setBounds(125, 91, 50, 20);
 				lblTempo2.setEnabled(false);
@@ -270,6 +316,12 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTempo2.setModel(new SpinnerNumberModel(24, 1, 72, 1));
 				lblEtapa2.add(spnTempo2);
 				
+				lblTempo2Horas = new JLabel();
+				lblTempo2Horas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTempo2Horas.setBounds(240, 87, 30, 30);
+				lblTempo2Horas.setText("[h]");
+				lblTempo2Horas.setEnabled(false);
+				lblEtapa2.add(lblTempo2Horas);
 				
 			lblEtapa3 = new JLabel();
 			lblEtapa3.setBounds(37, 350, 273, 130);
@@ -287,6 +339,22 @@ public class GerenciamentoReceitasFrame extends JFrame {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						
+						//@11-10-2016
+						///
+						if(chkbxEtapa3.isSelected()) {
+						
+							lblTemperaturaMaximaEntrada3GrauCelsius.setEnabled(true);
+							lblTemperaturaMaximaMassa3GrauCelsius.setEnabled(true);
+							lblTempo3Horas.setEnabled(true);
+							
+						} else {
+							
+							lblTemperaturaMaximaEntrada3GrauCelsius.setEnabled(false);
+							lblTemperaturaMaximaMassa3GrauCelsius.setEnabled(false);
+							lblTempo3Horas.setEnabled(false);
+							
+						}						
+						///
 						gerenciamentoReceitasListener.chkbxEtapa3Clicked();
 						
 					}
@@ -308,6 +376,13 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaEntrada3.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa3.add(spnTemperaturaMaximaEntrada3);
 				
+				lblTemperaturaMaximaEntrada3GrauCelsius = new JLabel();
+				lblTemperaturaMaximaEntrada3GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaEntrada3GrauCelsius.setBounds(240, 24, 30, 30);
+				lblTemperaturaMaximaEntrada3GrauCelsius.setText("[°C]");
+				lblTemperaturaMaximaEntrada3GrauCelsius.setEnabled(false);
+				lblEtapa3.add(lblTemperaturaMaximaEntrada3GrauCelsius);
+				
 				rdbtnTemperaturaMaximaMassa3 = new JRadioButton();
 				rdbtnTemperaturaMaximaMassa3.setBounds(30, 60, 160, 20);
 				rdbtnTemperaturaMaximaMassa3.setEnabled(false);
@@ -324,6 +399,13 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTemperaturaMaximaMassa3.setModel(new SpinnerNumberModel(45, 1, 120, 1));
 				lblEtapa3.add(spnTemperaturaMaximaMassa3);
 				
+				lblTemperaturaMaximaMassa3GrauCelsius = new JLabel();
+				lblTemperaturaMaximaMassa3GrauCelsius.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTemperaturaMaximaMassa3GrauCelsius.setBounds(240, 54, 30, 30);
+				lblTemperaturaMaximaMassa3GrauCelsius.setText("[°C]");
+				lblTemperaturaMaximaMassa3GrauCelsius.setEnabled(false);
+				lblEtapa3.add(lblTemperaturaMaximaMassa3GrauCelsius);
+				
 				lblTempo3 = new JLabel();
 				lblTempo3.setBounds(125, 91, 50, 20);
 				lblTempo3.setEnabled(false);
@@ -336,6 +418,13 @@ public class GerenciamentoReceitasFrame extends JFrame {
 				spnTempo3.setEnabled(false);
 				spnTempo3.setModel(new SpinnerNumberModel(24, 1, 72, 1));
 				lblEtapa3.add(spnTempo3);
+				
+				lblTempo3Horas = new JLabel();
+				lblTempo3Horas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblTempo3Horas.setBounds(240, 87, 30, 30);
+				lblTempo3Horas.setText("[h]");
+				lblTempo3Horas.setEnabled(false);
+				lblEtapa3.add(lblTempo3Horas);
 				
 			btnCriarReceita = new JButton();
 			btnCriarReceita.setBounds(115, 487, 115, 30);
